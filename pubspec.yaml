@@ -12,14 +12,16 @@ dependencies:
     sdk: flutter
 
   cupertino_icons: ^1.0.2
-  firebase_core:
   firebase_auth: ^4.3.0
-  provider:
-  fl_country_code_picker: ^0.1.2
+  firebase_core:
   sms_autofill: ^2.3.0
   flutter_svg:
   pinput:
-  timer_count_down: ^2.2.2
+  get: ^4.6.5
+  timer_snackbar:
+  country_code_picker:
+
+
 
 
 dev_dependencies:
