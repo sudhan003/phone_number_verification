@@ -3,6 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:get/get.dart';
 import 'package:phone_number_verification/controller/auth_controller.dart';
 import 'package:phone_number_verification/firebase_options.dart';
+import 'package:phone_number_verification/screens/otp_verification_screen.dart';
 import 'package:phone_number_verification/screens/phone_number_screen.dart';
 
 void main() async {

@@ -51,6 +51,13 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
               const SizedBox(
                 height: 50,
               ),
+              const Text(
+                "Enter OTP",
+                style: TextStyle(fontSize: 40),
+              ),
+              SizedBox(
+                height: 40,
+              ),
               Pinput(
                 length: 6,
                 controller: AuthController.instance.otpNumberController,

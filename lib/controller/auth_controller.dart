@@ -45,30 +45,39 @@ class AuthController extends GetxController {
               countryCodeController.text + phoneNumberController.text.trim(),
           timeout: const Duration(seconds: 50),
           verificationCompleted: (AuthCredential authCredential) {
-            Get.snackbar('about user', 'usermessage',
-                snackPosition: SnackPosition.BOTTOM,
-                titleText: const Text("verification"),
-                messageText: const Text("verification Completed"));
+            Get.snackbar(
+              'about user',
+              'usermessage',
+              snackPosition: SnackPosition.BOTTOM,
+              titleText: const Text("verification"),
+              messageText: const Text("verification Completed"),
+              backgroundColor: Colors.greenAccent,
+            );
           },
           verificationFailed: (FirebaseException exception) {
             Get.snackbar('about user', 'usermessage',
                 snackPosition: SnackPosition.BOTTOM,
                 titleText: const Text("verification"),
-                messageText: const Text("verification failed"));
+                messageText: const Text("verification failed"),
+                backgroundColor: Colors.redAccent);
           },
           codeSent: (String? verId, int? forceCodeResent) {
-            ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-              content: Text("Code sent successfully"),
-              backgroundColor: Colors.green,
-            ));
+            Get.snackbar('about user', 'usermessage',
+                snackPosition: SnackPosition.BOTTOM,
+                titleText: const Text("verification"),
+                messageText: const Text("Code sent successfully"),
+                backgroundColor: Colors.greenAccent);
 
             verificationId = verId;
             Get.to(() => const OtpVerificationScreen());
           },
           codeAutoRetrievalTimeout: (verId) {});
     } on FirebaseException catch (e) {
-      ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text(e.message!)));
+      Get.snackbar('about user', 'usermessage',
+          snackPosition: SnackPosition.BOTTOM,
+          titleText: const Text("error"),
+          messageText: Text(e.message!),
+          backgroundColor: Colors.redAccent);
     }
   }
 
@@ -83,27 +92,33 @@ class AuthController extends GetxController {
             Get.snackbar('about user', 'usermessage',
                 snackPosition: SnackPosition.BOTTOM,
                 titleText: const Text("verification"),
-                messageText: const Text("verification Completed"));
+                messageText: const Text("verification Completed"),
+                backgroundColor: Colors.greenAccent);
           },
           verificationFailed: (FirebaseException exception) {
             Get.snackbar('about user', 'usermessage',
                 snackPosition: SnackPosition.BOTTOM,
                 titleText: const Text("verification"),
-                messageText: const Text("verification failed"));
+                messageText: const Text("verification failed"),
+                backgroundColor: Colors.redAccent);
           },
           codeSent: (String? verId, int? forceCodeResent) {
-            ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-              content: Text("Code sent successfully"),
-              backgroundColor: Colors.green,
-            ));
+            Get.snackbar('about user', 'usermessage',
+                snackPosition: SnackPosition.BOTTOM,
+                titleText: const Text("verification"),
+                messageText: const Text("Code sent successfully"),
+                backgroundColor: Colors.redAccent);
 
             verificationId = verId;
             Get.to(() => const OtpVerificationScreen());
           },
           codeAutoRetrievalTimeout: (verId) {});
     } on FirebaseException catch (e) {
-      ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text(e.message!)));
+      Get.snackbar('about user', 'usermessage',
+          snackPosition: SnackPosition.BOTTOM,
+          titleText: const Text("error"),
+          messageText: Text(e.message!),
+          backgroundColor: Colors.redAccent);
     }
   }
 
@@ -135,16 +150,19 @@ class AuthController extends GetxController {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         content: timerSnackbar(
           context: context,
-          contentText: "A snackbar with live timer.",
+          contentText: "Too many attempts. Try again later",
           afterTimeExecute: () => Get.snackbar('about user', 'usermessage',
               snackPosition: SnackPosition.BOTTOM,
-              titleText: const Text("Attempts"),
-              messageText: const Text("Enter otp now")),
+              titleText: const Text("permission:"),
+              messageText: const Text(
+                "Enter otp now",
+                style: TextStyle(fontSize: 20),
+              ),
+              backgroundColor: Colors.greenAccent),
           second: 10,
         ),
       ));
     } else {
-
       String message = "Invalid code. ";
       int remainingAttempts = 5 - _invalidCodeCount;
       if (remainingAttempts <= 0) {
@@ -153,13 +171,15 @@ class AuthController extends GetxController {
         Get.snackbar('about user', 'usermessage',
             snackPosition: SnackPosition.BOTTOM,
             titleText: const Text("Attempts"),
-            messageText: Text(message += '1 attempt remaining.'));
+            messageText: Text(message += '1 attempt remaining.'),
+            backgroundColor: Colors.redAccent);
       } else {
         Get.snackbar('about user', 'usermessage',
             snackPosition: SnackPosition.BOTTOM,
             titleText: const Text("Attempts"),
             messageText:
-                Text(message += '$remainingAttempts attempts remaining.'));
+                Text(message += '$remainingAttempts attempts remaining.'),
+            backgroundColor: Colors.redAccent);
       }
     }
   }
